@@ -9,7 +9,7 @@ from .models import Todo
 # Create your views here.
 
 @api_view(['GET'])
-def apiOverview():
+def apiOverview(request):
 	api_urls = {
 		'List':'/todo-list/',
 		'Add Todo':'/add-Todo/',
@@ -20,8 +20,8 @@ def apiOverview():
 	return Response(api_urls)
 
 @api_view(['GET'])
-def todoList():
-	todos = Todo.objects.all().order_by('-id')
+def todoList(request):
+	todos = Todo.objects.all().order_by('created_at')
 	serializer = TodoSerializer(todos, many=True)
 	return Response(serializer.data)
 
@@ -35,7 +35,7 @@ def addTodo(request):
 
 	return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['PATCH'])
 def editTodo(request, pk):
 	todo = Todo.objects.get(id=pk)
 	serializer = TodoSerializer(instance=todo, data=request.data)
@@ -47,7 +47,7 @@ def editTodo(request, pk):
 
 
 @api_view(['GET', 'DELETE'])
-def deleteTodo(pk):
+def deleteTodo(request, pk):
 	todo = Todo.objects.get(id=pk)
 	todo.delete()
 

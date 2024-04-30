@@ -1,0 +1,18 @@
+h1 {
+  color:  #d79a28;
+  font-size: 36px;
+}
+
+button {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #d79a28;
+  border-radius: 12px;
+  margin: 5px;
+  padding: 12px 28px;
+}
+
+button:hover {
+  background-color: #d79a28;
+  color: white;
+}
